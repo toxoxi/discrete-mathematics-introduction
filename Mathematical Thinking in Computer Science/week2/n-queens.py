@@ -1,4 +1,4 @@
-# Example solution from the course
+COUNT = 0
 
 def can_be_extended_to_solution(perm):
 	i = len(perm) - 1
@@ -11,8 +11,9 @@ def can_be_extended_to_solution(perm):
 # extend permutation if can
 def extend(perm, n):
 	if len(perm) == n:
-		print(perm)
-		exit()
+		global COUNT
+		COUNT += 1
+		return
 
 	for k in range(n):
 		if k not in perm: # deny duplication of number
@@ -23,4 +24,5 @@ def extend(perm, n):
 
 			perm.pop()
 
-extend(perm = [], n = 20)
+extend(perm = [], n = 8)
+print(COUNT)
