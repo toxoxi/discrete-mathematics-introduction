@@ -3,13 +3,13 @@
 
 def is_even(p):
   a = p[:]
-  n = len(a)-1
+  n = len(a)
   sign = 0 # the number of transpositions mod 2
   s = -1 # first indices are at right places
-  while s < n:
+  while s < n-1:
     u = s+1
     t = u # a[t] is minimal among a[s+1]..a[u]
-    while u < n:
+    while u < n-1:
       u = u+1
       if a[u] < a[t]:
         t = u
