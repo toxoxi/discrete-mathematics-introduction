@@ -1,7 +1,12 @@
-def find_the_best_dice(dices):
+def compute_strategy(dices):
     assert all(len(dice) == 6 for dice in dices)
-
     dice_results = []
+
+    strategy = dict()
+    strategy["choose_first"] = False
+
+    for i in range(len(dices)):
+      strategy[i] = (i + 1) % len(dices)
 
     for i, dice in enumerate(dices):
       dice_results.append([])
@@ -13,10 +18,19 @@ def find_the_best_dice(dices):
     
     for k, result in enumerate(dice_results):
       if all(wins[0] > wins[1] for wins in result):
-        return k
+        return {
+          "choose_first": True,
+          "first_dice": k,
+        }
 
-    return -1
-    
+      most_winnable = result.index(max(result, key=lambda win: win[0] < win[1]))
+      if k <= most_winnable:
+        most_winnable+=1
+      
+      strategy[k] = most_winnable
+
+    return strategy
+
 def count_wins(dice1, dice2):
     assert len(dice1) == 6 and len(dice2) == 6
     dice1_wins, dice2_wins = 0, 0
